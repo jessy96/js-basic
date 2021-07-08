@@ -91,7 +91,31 @@ export const getArrayElementsPairs = (arr1, arr2) => {
 /**
  * Deep equal
  */
-export const deepEqual = () => {};
+export const deepEqual = (o1, o2) => {
+    function isObject(obj) {
+        return obj === Object(obj);
+    }
+    
+    if (o1 === o2) {
+        return true;
+    }
+    
+    for(var p in o1){
+        if(!o2.hasOwnProperty(p)) { // o2 does not have such property
+            return false;
+        }
+        if(!isObject(o1[p]) && o1[p]!== o2[p]) { // is simple type and not equal to o2
+            return false;
+        } else if (isObject(o1[p]) && !isObject(o2[p])) { // o2 property is not complex type
+            return false;
+        } else if (isObject(o1[p]) && isObject(o2[p])){ // both are complex types
+            if(!deepEqual(o1[p], o2[p])) { // recursion check nested property
+                return false;
+            }
+        }
+    }
+    return true; // has not failed the previous steps
+};
 
 /**
  * Format date
