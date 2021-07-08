@@ -133,6 +133,6 @@ export const formatDate = (date) => {
     month = month.padStart(2,'0');
     let year = date.getFullYear() + '';
     year = year.slice(-2);
-    let result = day + "." + month + "." + year;
+    let result = `${day}.${month}.${year}`;
     return result;
 };
