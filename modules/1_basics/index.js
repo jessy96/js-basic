@@ -96,4 +96,19 @@ export const deepEqual = () => {};
 /**
  * Format date
  */
-export const formatDate = () => {};
+export const formatDate = (date) => {
+    if (Array.isArray(date)){
+        date = new Date(date[0], date[1], date[2]);
+    } else {
+        date = new Date(date);
+    }
+      
+    let day = date.getDate() + '';
+    day = day.padStart(2, '0');
+    let month = date.getMonth() + 1 + '';
+    month = month.padStart(2,'0');
+    let year = date.getFullYear() + '';
+    year = year.slice(-2);
+    let result = day + "." + month + "." + year;
+    return result;
+};
